@@ -1,0 +1,11 @@
+:root {
+  color-scheme: light dark;
+  --gren: #00b755;
+  --yellow: #daaf38;
+  --red: #ca4754;
+  --black: #222;
+  --gray: #999;
+}
+body {
+  font-family: monospace;
+}
