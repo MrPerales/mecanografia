@@ -7,5 +7,9 @@
   --gray: #999;
 }
 body {
+  background: var(--black);
   font-family: monospace;
+  display: grid;
+  padding: 32px;
+  justify-content: center;
 }
