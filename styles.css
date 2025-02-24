@@ -13,3 +13,25 @@ body {
   padding: 32px;
   justify-content: center;
 }
+section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 500px;
+  padding: 16px;
+}
+time {
+  color: var(--yellow);
+}
+input {
+  z-index: -100;
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px 6px;
+}

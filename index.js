@@ -29,5 +29,17 @@ function initGame() {
         </x-word>`;
     })
     .join("");
+
+  const interval = setInterval(() => {
+    currentTime--;
+    $time.textContent = currentTime;
+    if (currentTime === 0) {
+      clearInterval(interval); //para el contador
+      gameOver();
+    }
+  }, 1000);
 }
 function initEvents() {}
+function gameOver() {
+  console.log("GameOver");
+}
