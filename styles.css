@@ -35,7 +35,7 @@ p {
   flex-wrap: wrap;
   gap: 3px 6px;
 }
-x-latter {
+x-letter {
   color: var(--gray);
   position: relative;
 
@@ -45,6 +45,12 @@ x-latter {
     position: absolute;
     left: -50%;
     animation: 1s blink infinite ease-in-out;
+  }
+  &.correct {
+    color: var(--gren);
+  }
+  &.incorrect {
+    color: var(--red);
   }
 }
 
