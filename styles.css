@@ -35,3 +35,25 @@ p {
   flex-wrap: wrap;
   gap: 3px 6px;
 }
+x-latter {
+  color: var(--gray);
+  position: relative;
+
+  &.active::before {
+    content: "|";
+    color: var(--yellow);
+    position: absolute;
+    left: -50%;
+    animation: 1s blink infinite ease-in-out;
+  }
+}
+
+@keyframes blink {
+  0%,
+  25% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+}

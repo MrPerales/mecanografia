@@ -29,6 +29,10 @@ function initGame() {
         </x-word>`;
     })
     .join("");
+  //seleccionamos la primera palabra y letra para pintar el cursor "|"
+  const $firstWord = $paragraph.querySelector("x-word");
+  $firstWord.classList.add("active");
+  $firstWord.querySelector("x-latter").classList.add("active");
 
   const interval = setInterval(() => {
     currentTime--;
