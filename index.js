@@ -6,7 +6,7 @@ const $input = $("input");
 
 const INITIAL_TIME = 10;
 const TEXT =
-  "estas palabras abarcan una buena variedad de letras combinaciones y elementos gramaticales sin repetirse Espero que te sean útiles para practicar mecanografía";
+  "estas palabras abarcan una buena variedad de letras combinaciones y elementos gramaticales sin repetirse espero que te sean útiles para practicar mecanografía";
 
 let words = [];
 let currentTime = INITIAL_TIME;
@@ -50,7 +50,29 @@ function initEvents() {
   document.addEventListener("keydown", onKeyDown);
   document.addEventListener("keyup", onKeyUp);
 }
-function onKeyDown() {}
+function onKeyDown(event) {
+  // recuperamos elementos actuales
+  const $currentWord = $paragraph.querySelector("x-word.active");
+  const $currentLetter = $currentWord.querySelector("x-letter.active");
+  const { key } = event;
+  // controlamos el space
+  if (key === " ") {
+    event.preventDefault();
+    //pasamos a la sig palabra con ayuda de "nextElementSibling"
+    const $nextWord = $currentWord.nextElementSibling;
+    const $nexLetter = $nextWord.querySelector("x-letter");
+
+    // quitamos styles de la palabra anterior
+    $currentWord.classList.remove("active");
+    $currentLetter.classList.remove("active");
+
+    // agregamos estilos a la palabra sig
+    $nextWord.classList.add("active");
+    $nexLetter.classList.add("active");
+    // reseteo del input
+    $input.value = "";
+  }
+}
 function onKeyUp() {
   // recuperamos elementos actuales
   const $currentWord = $paragraph.querySelector("x-word.active");
