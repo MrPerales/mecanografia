@@ -76,6 +76,18 @@ function onKeyUp() {
       $letter.classList.add("incorrect");
     }
   });
+
+  // moviendo cursor
+  $currentLetter.classList.remove("active", "is-last");
+  // vemos en que letra va para poder poner el cursor
+  const inputLength = $input.value.length;
+  const $nextActiveLetter = $allLetters[inputLength];
+  if ($nextActiveLetter) {
+    $nextActiveLetter.classList.add("active");
+  } else {
+    // movemos el cursor a la derecha "letra| ....| "
+    $currentLetter.classList.add("active", "is-last");
+  }
 }
 function gameOver() {
   console.log("GameOver");
