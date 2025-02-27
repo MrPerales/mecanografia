@@ -63,7 +63,7 @@ function onKeyDown(event) {
     const $nexLetter = $nextWord.querySelector("x-letter");
 
     // quitamos styles de la palabra anterior
-    $currentWord.classList.remove("active");
+    $currentWord.classList.remove("active", "marked");
     $currentLetter.classList.remove("active");
 
     // agregamos estilos a la palabra sig
@@ -71,6 +71,14 @@ function onKeyDown(event) {
     $nexLetter.classList.add("active");
     // reseteo del input
     $input.value = "";
+
+    // marcamos la palabra si no fue completada
+    const hasMissedLetters =
+      $currentWord.querySelectorAll("x-letter:not(.correct)").length > 0;
+
+    const classMissed = hasMissedLetters ? "marked" : "correct";
+
+    $currentWord.classList.add(classMissed);
   }
 }
 function onKeyUp() {
