@@ -80,6 +80,41 @@ function onKeyDown(event) {
 
     $currentWord.classList.add(classMissed);
   }
+  // retroceso si la palabra esta mal
+
+  if (key === "Backspace") {
+    const $previousWord = $currentWord.previousElementSibling;
+    const $previousLetter = $currentLetter.previousElementSibling;
+
+    if (!$previousWord && !$previousLetter) {
+      event.preventDefault();
+      return;
+    }
+    const $wordMarked = $paragraph.querySelector("x-word.marked");
+    if ($wordMarked && !$previousLetter) {
+      event.preventDefault();
+      $previousWord.classList.remove("marked");
+      $previousWord.classList.add("active");
+
+      const $letterToGo = $previousWord.querySelector("x-letter:last-child");
+
+      $currentLetter.classList.remove("active");
+      $letterToGo.classList.add("active");
+      // recuperamos las palabras que a puesto el usuario )
+      // ya que al regresar con un backspace el input esta vacio
+      $input.value = [
+        ...$previousWord.querySelectorAll(
+          "x-letter.correct, x-letter.incorect"
+        ),
+      ]
+        .map(($letter) => {
+          return $letter.classList.contains("correct")
+            ? $letter.innerText
+            : "*";
+        })
+        .join("");
+    }
+  }
 }
 function onKeyUp() {
   // recuperamos elementos actuales
