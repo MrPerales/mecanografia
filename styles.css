@@ -56,6 +56,14 @@ x-letter {
     color: var(--red);
   }
 }
+x-word {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.5s ease-in-out;
+
+  &.marked {
+    border-color: var(--red);
+  }
+}
 
 @keyframes blink {
   0%,
