@@ -1,3 +1,4 @@
+import { EnglishEasyWords } from "./data.js";
 const $ = (element) => document.querySelector(element);
 
 const $time = $("time");
@@ -5,9 +6,7 @@ const $paragraph = $("p");
 const $input = $("input");
 
 const INITIAL_TIME = 10;
-const TEXT =
-  "estas palabras abarcan una buena variedad de letras combinaciones y elementos gramaticales sin repetirse espero que te sean útiles para practicar mecanografía";
-
+let INITIAL_WORDS = EnglishEasyWords;
 let words = [];
 let currentTime = INITIAL_TIME;
 
@@ -15,7 +14,8 @@ initGame();
 initEvents();
 
 function initGame() {
-  words = TEXT.split(" ").slice(0, 20);
+  // palabras en posiciones randoms
+  words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 40);
   currentTime = INITIAL_TIME;
   $time.textContent = currentTime;
   //dividimos las palabras y las letras en diferentes etiquetas
