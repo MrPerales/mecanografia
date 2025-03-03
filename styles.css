@@ -64,7 +64,39 @@ x-word {
     border-color: var(--red);
   }
 }
+#game {
+  display: flex;
+}
+#results {
+  display: none;
+}
+h2 {
+  font-weight: 400;
+  opacity: 0.5;
+  font-size: 18px;
+}
+h3 {
+  font-weight: 400;
+  font-size: 24px;
+  color: var(--yellow);
+}
+#reload-btn {
+  background: transparent;
+  border: 0;
+  margin-top: 30px;
+  opacity: 0.5;
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 20px;
 
+  &:hover {
+    background: #333;
+    opacity: 1;
+    scale: 110%;
+  }
+}
 @keyframes blink {
   0%,
   25% {
