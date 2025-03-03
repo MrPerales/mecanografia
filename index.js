@@ -4,8 +4,13 @@ const $ = (element) => document.querySelector(element);
 const $time = $("time");
 const $paragraph = $("p");
 const $input = $("input");
+const $game = $("#game");
+const $wpm = $("#wpm-result");
+const $results = $("#results");
+const $accuracy = $("#accuracy-result");
+const $reloadBtn = $("#reload-btn");
 
-const INITIAL_TIME = 10;
+const INITIAL_TIME = 60;
 let INITIAL_WORDS = EnglishEasyWords;
 let words = [];
 let currentTime = INITIAL_TIME;
@@ -14,6 +19,9 @@ initGame();
 initEvents();
 
 function initGame() {
+  $game.style.display = "flex";
+  $results.style.display = "none";
+  $input.value = "";
   // palabras en posiciones randoms
   words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 40);
   currentTime = INITIAL_TIME;
@@ -47,8 +55,9 @@ function initEvents() {
   document.addEventListener("click", () => {
     $input.focus();
   });
-  document.addEventListener("keydown", onKeyDown);
-  document.addEventListener("keyup", onKeyUp);
+  $input.addEventListener("keydown", onKeyDown);
+  $input.addEventListener("keyup", onKeyUp);
+  $reloadBtn.addEventListener("click", initGame);
 }
 function onKeyDown(event) {
   // recuperamos elementos actuales
@@ -156,4 +165,17 @@ function onKeyUp() {
 }
 function gameOver() {
   console.log("GameOver");
+  $game.style.display = "none";
+  $results.style.display = "flex";
+
+  const correctWords = $paragraph.querySelectorAll("x-word.correct").length;
+  const correctLetters = $paragraph.querySelectorAll("x-letter.correct").length;
+  const incorectLetters =
+    $paragraph.querySelectorAll("x-letter.incorrect").length;
+  const totalLetters = incorectLetters + correctLetters;
+
+  const accuracy = totalLetters > 0 ? (correctLetters / totalLetters) * 100 : 0;
+  const wpm = correctWords / INITIAL_TIME;
+  $wpm.textContent = wpm;
+  $accuracy.textContent = `${accuracy.toFixed(2)}%`;
 }
