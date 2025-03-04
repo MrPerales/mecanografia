@@ -9,10 +9,32 @@
   </head>
   <body>
     <main>
+      <section id="modal">
+        <h1>Mecanografia</h1>
+        <form id="settings">
+          <label for="english">
+            <input id="english" type="radio" name="language" />
+            English
+          </label>
+          <label for="spanish">
+            <input id="spanish" type="radio" name="language" />
+            Spanish
+          </label>
+          <label for="easy">
+            <input id="easy" type="radio" name="dificulty" />
+            Easy
+          </label>
+          <label for="hard">
+            <input id="hard" type="radio" name="dificulty" />
+            Hard
+          </label>
+        </form>
+        <button disabled id="play-btn">Play</button>
+      </section>
       <section id="game">
         <time></time>
         <p></p>
-        <input autofocus />
+        <input id="input-txt" autofocus />
       </section>
       <section id="results">
         <h2 id="wpm">wpm</h2>

@@ -23,7 +23,18 @@ section {
 time {
   color: var(--yellow);
 }
-input {
+#modal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+} */
+#input-txt {
   z-index: -100;
   position: absolute;
   top: 0;
