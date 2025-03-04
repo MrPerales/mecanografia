@@ -21,6 +21,7 @@ const $englishCheck = $("#english");
 const $easyCheck = $("#easy");
 const $hardCheck = $("#hard");
 const $form = $("#settings");
+const $homeBtn = $("#home-btn");
 
 const INITIAL_TIME = 60;
 let INITIAL_WORDS;
@@ -96,6 +97,11 @@ function initEvents() {
   $input.addEventListener("keydown", onKeyDown);
   $input.addEventListener("keyup", onKeyUp);
   $reloadBtn.addEventListener("click", initGame);
+  $homeBtn.addEventListener("click", () => {
+    $modal.style.display = "flex";
+    $game.style.display = "none";
+    $results.style.display = "none";
+  });
 }
 function onKeyDown(event) {
   // recuperamos elementos actuales
