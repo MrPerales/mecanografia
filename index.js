@@ -1,21 +1,45 @@
-import { EnglishEasyWords } from "./data.js";
+import {
+  EnglishEasyWords,
+  SpanishHardWords,
+  EnglishHardWords,
+  SpanishWords,
+} from "./data.js";
 const $ = (element) => document.querySelector(element);
 
 const $time = $("time");
 const $paragraph = $("p");
-const $input = $("input");
+const $input = $("#input-txt");
 const $game = $("#game");
 const $wpm = $("#wpm-result");
 const $results = $("#results");
 const $accuracy = $("#accuracy-result");
 const $reloadBtn = $("#reload-btn");
+const $modal = $("#modal");
+const $playBtn = $("#play-btn");
+const $spanishCheck = $("#spanish");
+const $englishCheck = $("#english");
+const $easyCheck = $("#easy");
+const $hardCheck = $("#hard");
+const $form = $("#settings");
 
 const INITIAL_TIME = 60;
-let INITIAL_WORDS = EnglishEasyWords;
+let INITIAL_WORDS;
 let words = [];
 let currentTime = INITIAL_TIME;
 
-initGame();
+function selectLanguage() {
+  if ($spanishCheck?.checked && $easyCheck?.checked) {
+    INITIAL_WORDS = SpanishWords;
+  } else if ($spanishCheck?.checked && $hardCheck?.checked) {
+    INITIAL_WORDS = SpanishHardWords;
+  } else if ($englishCheck?.checked && $easyCheck?.checked) {
+    INITIAL_WORDS = EnglishEasyWords;
+  } else if ($englishCheck?.checked && $hardCheck?.checked) {
+    INITIAL_WORDS = EnglishHardWords;
+  }
+  return INITIAL_WORDS;
+}
+// initGame();
 initEvents();
 
 function initGame() {
@@ -23,7 +47,7 @@ function initGame() {
   $results.style.display = "none";
   $input.value = "";
   // palabras en posiciones randoms
-  words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 40);
+  words = INITIAL_WORDS.toSorted(() => Math.random() - 0.5).slice(0, 45);
   currentTime = INITIAL_TIME;
   $time.textContent = currentTime;
   //dividimos las palabras y las letras en diferentes etiquetas
@@ -53,7 +77,21 @@ function initGame() {
 }
 function initEvents() {
   document.addEventListener("click", () => {
+    // $input.focus();
+  });
+  $form.addEventListener("change", () => {
+    if (
+      ($spanishCheck.checked || $englishCheck.checked) &&
+      ($easyCheck.checked || $hardCheck.checked)
+    ) {
+      $playBtn.disabled = false;
+    }
+  });
+  $playBtn.addEventListener("click", () => {
+    $modal.style.display = "none";
     $input.focus();
+    selectLanguage();
+    initGame();
   });
   $input.addEventListener("keydown", onKeyDown);
   $input.addEventListener("keyup", onKeyUp);
